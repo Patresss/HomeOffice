@@ -1,0 +1,304 @@
+.root {
+
+    -color-primary-bright-10: #ffffff;
+    -color-primary-bright-9: #e5f3fa;
+    -color-primary-bright-8: #cce7f5;
+    -color-primary-bright-7: #b3dbf1;
+    -color-primary-bright-6: #99cfec;
+    -color-primary-bright-5: #80c3e8;
+    -color-primary-bright-4: #67b7e3;
+    -color-primary-bright-3: #4dabde;
+    -color-primary-bright-2: #349fda;
+    -color-primary-bright-1: #1b93d5;
+    -color-primary: #0288D1;
+    -color-primary-dark-1: #017abc;
+    -color-primary-dark-2: #016ca7;
+    -color-primary-dark-3: #015f92;
+    -color-primary-dark-4: #01517d;
+    -color-primary-dark-5: #014468;
+    -color-primary-dark-6: #003653;
+    -color-primary-dark-7: #00283e;
+    -color-primary-dark-8: #001b29;
+    -color-primary-dark-9: #000d14;
+    -color-primary-dark-10: #000000;
+
+    -color-complementary-bright-8: #f5dbcc;
+    -color-complementary-bright-7: #f1c9b3;
+    -color-complementary-bright-6: #ecb799;
+    -color-complementary-bright-4: #e39367;
+    -color-complementary-bright-2: #da6e34;
+    -color-complementary: #d14b02; /* https://www.color-hex.com/color/d14b02 */
+
+
+    -color-primary-dark: #0288D1;
+    -color-primary-ligth: #B3E5FC;
+
+    -color-primary-text: #01547a; /*1, 84, 122*/
+    -color-primary-text-transparent: rgba(1, 84, 122, 0.9);
+
+    -color-background: #FFFFFF;
+    -color-accent: #FFC107;
+    -color-accent-ligth: #ffecb4;
+    -color-divider: #B6B6B6;
+
+    -color-root-error: #ff4d4d;
+
+    -main-button-size: 30px;
+    -small-button-size: 10px;
+}
+
+root {
+    -fx-font-family: "Roboto-Regular";
+}
+
+
+.jfx-text-field, .jfx-text-area, .jfx-password-field {
+    -jfx-unfocus-color: -color-primary-dark;
+    -jfx-focus-color: -color-primary;
+}
+
+/* ================================================================================*\
+ * SQL Table View
+\* ================================================================================*/
+.table-view {
+    -fx-control-inner-background: -color-background;
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 0 50 50;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -color-background;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 11pt;
+    -fx-alignment: center-left;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+/* ================================================================================*\
+ * SQL Query
+\* ================================================================================*/
+.side-menu {
+    -fx-padding: 20.0, 10.0;
+    -fx-font-size: 15.0;
+    -fx-font-weight: NORMAL;
+}
+
+/* ================================================================================*\
+ * Text
+\* ================================================================================*/
+.text-combobox {
+    -fx-fill: -color-primary-text;
+    -fx-translate-x: -7.0;
+}
+
+.jfx-combo-box {
+    -fx-text-inner-color: red;
+    -fx-prompt-text-fill: red;
+}
+
+.jfx-combo-box .cell {
+    -fx-text-fill: red;
+}
+
+/* ================================================================================*\
+ * Label
+\* ================================================================================*/
+.label {
+    -fx-text-fill: -color-primary-text;
+    -fx-font-weight: bold;
+}
+
+.label.error {
+    -fx-text-fill: -color-root-error;
+    -fx-font-weight: bold;
+}
+
+.text {
+    -fx-text-fill: -color-primary-text;
+    -fx-font-weight: bold;
+}
+
+.label-title {
+    -fx-font-size: 20.0px;
+    -fx-padding: 14.0px;
+    -fx-font-weight: bold;
+}
+
+.strike-label .text {
+    -fx-strikethrough: true;
+    -fx-opacity: 0.5;
+}
+
+/* ================================================================================*\
+ * Text Field
+\* ================================================================================*/
+.text-field {
+    -fx-background-color: -color-background;
+}
+
+/* ================================================================================*\
+ * Button
+\* ================================================================================*/
+.button {
+    -fx-background-radius: 50.0;
+    -fx-background-color: -color-primary;
+    -fx-font-size: 11.0pt;
+    -fx-text-fill: -color-primary-bright-10;
+    -fx-cursor: hand;
+
+    -fx-pref-height: 30px;
+    -fx-pref-width: 100px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -jfx-button-type: RAISED;
+}
+
+.button-secondary {
+    -fx-text-fill: -color-primary-dark-1;
+    -fx-background-color: -color-primary-bright-9;
+
+    -fx-background-radius: 50.0;
+    -fx-font-size: 11.0pt;
+    -fx-cursor: hand;
+
+    -fx-pref-height: 30px;
+    -fx-pref-width: 100px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -jfx-button-type: RAISED;
+}
+
+
+
+
+/* ================================================================================*\
+ * JFX Decorator
+\* ================================================================================*/
+.jfx-decorator {
+    -fx-decorator-color: -color-primary;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container {
+    -fx-background-color: -fx-decorator-color;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container .button {
+    -fx-background-color: -fx-decorator-color;
+}
+
+.jfx-decorator .resize-border {
+    -fx-border-color: -fx-decorator-color;
+    -fx-border-width: 0 4 4 4;
+}
+
+.main-button {
+    -fx-pref-width: 40px;
+    -fx-background-radius: 40px;
+    -fx-pref-height: 40px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -jfx-button-type: RAISED;
+    -fx-font-size: 20pt;
+}
+
+.main-button-color {
+    -fx-background-color:  #F1F1F1;
+}
+
+.exit-button {
+    -fx-pref-width: 15px;
+    -fx-background-color:  #F1F1F1;
+    -fx-background-radius: 15px;
+    -fx-pref-height: 15px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -jfx-button-type: RAISED;
+    -fx-font-size: 8pt;
+}
+
+.main-button .jfx-rippler {
+    -jfx-rippler-fill: rgba(255, 255, 255, .87);
+}
+
+.main-icon {
+    -fx-fill: rgba(255, 255, 255, .87);
+}
+
+.pushed-icon {
+    -fx-fill: rgba(255, 255, 255, .87);
+}
+
+.available-button-pushed {
+    -fx-background-color:  rgba(50,205,50, .87);
+}
+
+.available-icon {
+    -fx-fill: rgba(50,205,50, .87);
+}
+
+.working-button-pushed {
+    -fx-background-color:  rgba(255, 213, 0, .87);
+}
+
+.working-icon {
+    -fx-fill: rgba(255, 213, 0, .87);
+}
+
+.meeting-icon {
+    -fx-fill: rgba(177, 0, 0, .87);
+}
+
+.meeting-button-pushed {
+    -fx-background-color: rgba(177, 0, 0, .87);
+}
+
+.automation-icon {
+    -fx-fill: rgba(1, 108, 167, .87);
+}
+
+.automation-button-pushed {
+    -fx-background-color: rgba(1, 108, 167, .87);
+}
+
+.turn-off-icon {
+    -fx-fill: rgba(	0, 27, 41, .87);
+}
+
+.turn-off-button-pushed {
+    -fx-background-color: rgba(	0, 27, 41, .87);
+}
+
+
+.main-pane {
+    -fx-background-color:  rgba(122, 122, 122, .01);
+}
+
+.toggle-button {
+    -jfx-toggle-color: -color-primary-bright-2;
+    -jfx-untoggle-color: -color-primary-dark-4;
+    -jfx-untoggle-line-color: -color-primary-bright-6;
+    -jfx-toggle-line-color: -color-primary-dark-6;
+}

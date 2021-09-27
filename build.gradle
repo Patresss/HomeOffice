@@ -1,0 +1,157 @@
+buildscript {
+    ext.java_version = '17'
+    ext.jfoenix_version = '9.0.10'
+    ext.log4j_version = '1.2.17'
+    ext.slf4j_version = '1.7.5'
+    ext.fontawesomefx_fontawesome_version = '4.7.0-9.1.2'
+    ext.fontawesomefx_commons_version = '9.1.2'
+    ext.opencv_version = '4.5.1-2'
+    ext.jackson_version = '2.13.0-rc2'
+    ext.philips_hue_version = '2.3.0'
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
+
+plugins {
+    id 'application'
+    id 'java'
+    id 'idea'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.beryx.jlink' version '2.24.2'
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
+group 'com.patres'
+version '1.0.0'
+mainClassName = 'com.patres.homeoffice.ApplicationLauncher'
+application.mainModule = 'homeOffice'
+
+javafx {
+    version = "17"
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing']
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "com.jfoenix:jfoenix:$jfoenix_version"
+
+    implementation "log4j:log4j:$log4j_version"
+    implementation "org.slf4j:slf4j-api:$slf4j_version"
+    implementation "org.slf4j:slf4j-log4j12:$slf4j_version"
+
+    implementation "de.jensd:fontawesomefx-fontawesome:$fontawesomefx_fontawesome_version"
+    implementation "de.jensd:fontawesomefx-commons:$fontawesomefx_commons_version"
+
+
+    implementation "org.openpnp:opencv:$opencv_version"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jackson_version"
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson_version"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
+    implementation "io.github.zeroone3010:yetanotherhueapi:$philips_hue_version"
+
+}
+
+
+def runArgsValue =  [
+        "--add-opens=java.base/java.lang.reflect=com.jfoenix",
+        "--add-opens=java.base/java.lang=opencv",
+        "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix",
+        "--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix",
+        "--add-opens=javafx.controls/javafx.scene.control=homeOffice",
+        "--add-opens=javafx.graphics/javafx.scene=homeOffice",
+        "--add-opens=javafx.graphics/javafx.scene=homeOffice",
+        "--add-reads=homeOffice=com.fasterxml.jackson.databind"
+]
+
+def title = "Home office"
+project.version = "1.0.0"
+project.description = "Tool for automation lights - home office"
+
+run {
+    jvmArgs = runArgsValue
+}
+
+
+jlink {
+    addExtraDependencies("javafx")
+    mergedModule {
+        additive = true
+        requires "com.fasterxml.jackson.databind"
+    }
+    launcher {
+        name = title
+        jvmArgs = runArgsValue
+    }
+
+    jpackage {
+        installerType = 'exe'
+        appVersion = project.version
+        outputDir = "../release/${project.version}"
+        installerOptions = [
+                '--description', description,
+                '--copyright', 'Copyrigth 2021 Patres - Patryk Piechaczek'
+        ]
+        imageOptions += ['--icon', 'src/main/resources/icon/desktop/main_icon.ico']
+        if (installerType == 'exe') {
+            installerOptions += [
+                    '--win-dir-chooser',
+                    '--win-menu',
+                    '--win-shortcut'
+            ]
+        }
+
+        if (installerType == 'pkg') {
+            imageOptions += ['--icon', 'src/main/resources/icon/desktop/main_icon.icns']
+        }
+
+        if (installerType in ['deb', 'rpm']) {
+            imageOptions += ['--icon', 'src/main/resources/icon/desktop/main_icon.ico']
+            installerOptions += [
+                    '--linux-shortcut'
+            ]
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// Create Installer =======================================
+task createInstaller {
+    doFirst {
+        println 'Create Installer'
+    }
+
+    doLast {
+        println 'Remove unused installer directory'
+        def isDeleted = project.delete(files("${rootDir}\\release\\${project.version}\\$title"))
+        println "Directory is deleted: ${isDeleted}"
+    }
+
+}
+
+createInstaller.dependsOn jpackage
+// ========================================================
+
+task packageExecutableZip(type: Zip) {
+    archiveFileName = "${title}-${project.version}.zip"
+    destinationDirectory = file("${rootDir}\\release\\${project.version}")
+    from "$buildDir/image"
+}
