@@ -4,18 +4,18 @@ light:
   phlipsHueRoomName: Biuro
   phlipsHueLightName: Lightstrip
   brightnes: 30
-  lightMode: AVAILABLE
+  lightMode: "WORKING"
   automationFrequencySeconds: 1
 window:
   pinned: true
-  positionX:
-  positionY:
+  positionX: -938
+  positionY: 138
 workingTime:
   days:
-    - MONDAY
-    - TUESDAY
-    - WEDNESDAY
-    - THURSDAY
-    - FRIDAY
-  start: 09:00
-  end: 17:00
+  - "MONDAY"
+  - "TUESDAY"
+  - "WEDNESDAY"
+  - "FRIDAY"
+  - "THURSDAY"
+  start: "09:00"
+  end: "17:00"

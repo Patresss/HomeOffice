@@ -33,11 +33,11 @@
                      <graphic>
                      </graphic>
                      <graphic>
-                        <FontAwesomeIconView glyphName="LIGHTBULB_ALT" styleClass="available-icon" />
+                        <FontAwesomeIconView glyphName="LIGHTBULB_ALT" />
                      </graphic>
                      <styleClass>
                         <String fx:value="main-button" />
-                        <String fx:value="main-button-color" />
+                        <String fx:value="available-button" />
                      </styleClass>
                   </JFXButton>
                       <JFXButton fx:id="workingButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="1">
@@ -48,7 +48,7 @@
                      </graphic>
                      <styleClass>
                         <String fx:value="main-button" />
-                        <String fx:value="main-button-color" />
+                        <String fx:value="working-button" />
                      </styleClass>
                   </JFXButton>
                   <JFXButton fx:id="meetingMicrophoneButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="2">
@@ -59,7 +59,7 @@
                      </graphic>
                      <styleClass>
                         <String fx:value="main-button" />
-                        <String fx:value="main-button-color" />
+                        <String fx:value="meeting-microphone-button" />
                      </styleClass>
                   </JFXButton>
                   <JFXButton fx:id="automationButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="4">
@@ -70,7 +70,7 @@
                      </graphic>
                      <styleClass>
                         <String fx:value="main-button" />
-                        <String fx:value="main-button-color" />
+                        <String fx:value="automation-button" />
                      </styleClass>
                   </JFXButton>
                   <JFXButton fx:id="turnOffButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="5">
@@ -81,7 +81,7 @@
                      </graphic>
                      <styleClass>
                         <String fx:value="main-button" />
-                        <String fx:value="main-button-color" />
+                        <String fx:value="turn-off-button" />
                      </styleClass>
                   </JFXButton>
                   <GridPane vgap="10.0" GridPane.columnIndex="6">
@@ -103,11 +103,11 @@
                   </GridPane>
                   <JFXButton fx:id="meetingWebcamButton" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" textAlignment="CENTER" GridPane.columnIndex="3">
                      <graphic>
-                        <FontAwesomeIconView glyphName="LIGHTBULB_ALT" styleClass="meeting-webcam-icon" />
+                        <FontAwesomeIconView glyphName="LIGHTBULB_ALT" />
                      </graphic>
                      <styleClass>
                         <String fx:value="main-button" />
-                        <String fx:value="main-button-color" />
+                        <String fx:value="meeting-webcam-button" />
                      </styleClass>
                   </JFXButton>
                </children>

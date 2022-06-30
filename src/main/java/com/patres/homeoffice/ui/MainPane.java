@@ -19,6 +19,7 @@ import java.util.Optional;
 public class MainPane extends AnchorPane {
 
     public static final String BUTTON_PUSHED_SUFFIX_STYLE = "-button-pushed";
+    public static final String BUTTON_SUFFIX_STYLE = "-button";
     public static final String MAIN_BUTTON_COLOR_STYLE = "main-button-color";
     public static final String PUSHED_ICON_STYLE = "pushed-icon";
     public static final String ICON_SUFFIX_STYLE = "-icon";
@@ -56,6 +57,7 @@ public class MainPane extends AnchorPane {
         fxmlLoader.load();
     }
 
+    @FXML
     public void initialize() {
         pinToggleButton.setSelected(!primaryStage.isAlwaysOnTop());
         pinToggleButton.selectedProperty().addListener((obs, newValue, oldValue) -> primaryStage.setAlwaysOnTop(newValue));
@@ -84,7 +86,19 @@ public class MainPane extends AnchorPane {
             selectButton(turnOffButton);
             new Thread(() -> phlipsHueManager.changeLightMode(LightMode.TURN_OFF)).start();
         });
+        phlipsHueManager.getCurrentLightMode()
+                .ifPresent(lightMode -> selectButton(getButtonByLightMode(lightMode)));
+    }
 
+    private JFXButton getButtonByLightMode(final LightMode lightMode) {
+        return switch (lightMode) {
+            case AVAILABLE -> availableButton;
+            case WORKING -> workingButton;
+            case MEETING_MICROPHONE -> meetingMicrophoneButton;
+            case MEETING_WEBCAM -> meetingWebcamButton;
+            case TURN_OFF -> turnOffButton;
+            case AUTOMATION -> automationButton;
+        };
     }
 
     @FXML
@@ -98,18 +112,10 @@ public class MainPane extends AnchorPane {
         final String styleName = LightMode.findByButtonsId(buttonToSelect.getId())
                 .map(LightMode::getName)
                 .orElseThrow(() -> new ApplicationException("Cannot find style by id: " + buttonToSelect.getId()));
-
         if (!buttonToSelect.getStyleClass().contains(styleName + BUTTON_PUSHED_SUFFIX_STYLE)) {
             buttonToSelect.getStyleClass().add(styleName + BUTTON_PUSHED_SUFFIX_STYLE);
-            buttonToSelect.getStyleClass().remove(MAIN_BUTTON_COLOR_STYLE);
+            buttonToSelect.getStyleClass().remove(styleName + BUTTON_SUFFIX_STYLE);
         }
-
-        findIconStyles(buttonToSelect)
-                .filter(styles -> !styles.contains(PUSHED_ICON_STYLE))
-                .ifPresent(styles -> {
-                    styles.remove(styleName + ICON_SUFFIX_STYLE);
-                    styles.add(PUSHED_ICON_STYLE);
-                });
         selectedButton = buttonToSelect;
     }
 
@@ -118,27 +124,12 @@ public class MainPane extends AnchorPane {
             final String styleName = LightMode.findByButtonsId(selectedButton.getId())
                     .map(LightMode::getName)
                     .orElseThrow(() -> new ApplicationException("Cannot find style by id: " + selectedButton.getId()));
-
             if (!selectedButton.getStyleClass().contains(MAIN_BUTTON_COLOR_STYLE)) {
                 selectedButton.getStyleClass().remove(styleName + BUTTON_PUSHED_SUFFIX_STYLE);
-                selectedButton.getStyleClass().add(MAIN_BUTTON_COLOR_STYLE);
+                selectedButton.getStyleClass().add(styleName + BUTTON_SUFFIX_STYLE);
             }
-            findIconStyles(selectedButton)
-                    .filter(styles -> !styles.contains(styleName + ICON_SUFFIX_STYLE))
-                    .ifPresent(styles -> {
-                        styles.remove(PUSHED_ICON_STYLE);
-                        styles.add(styleName + ICON_SUFFIX_STYLE);
-                    });
         }
-
         selectedButton = newButtonToSelect;
-    }
-
-    private Optional<ObservableList<String>> findIconStyles(final JFXButton button) {
-        return button.getChildrenUnmodifiable().stream()
-                .filter(FontAwesomeIconView.class::isInstance)
-                .map(Node::getStyleClass)
-                .findFirst();
     }
 
 }

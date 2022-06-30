@@ -222,10 +222,6 @@ root {
     -fx-font-size: 20pt;
 }
 
-.main-button-color {
-    -fx-background-color:  #F1F1F1;
-}
-
 .exit-button {
     -fx-pref-width: 15px;
     -fx-background-color:  #F1F1F1;
@@ -243,31 +239,46 @@ root {
     -jfx-rippler-fill: rgba(255, 255, 255, .87);
 }
 
-.main-icon {
-    -fx-fill: rgba(255, 255, 255, .87);
+
+.available-button {
+    -fx-background-color:  #F1F1F1;
 }
 
-.pushed-icon {
-    -fx-fill: rgba(255, 255, 255, .87);
-}
-
-.available-button-pushed {
-    -fx-background-color:  rgba(50,205,50, .87);
-}
-
-.available-icon {
+.available-button .glyph-icon{
     -fx-fill: rgba(50,205,50, .87);
 }
 
-.working-button-pushed {
-    -fx-background-color:  rgba(255, 213, 0, .87);
+.available-button-pushed {
+    -fx-background-color: rgba(50,205,50, .87);
 }
 
-.working-icon {
+.available-button-pushed .glyph-icon{
+    -fx-fill: rgba(255, 255, 255, .87);
+}
+
+
+.working-button {
+    -fx-background-color:  #F1F1F1;
+}
+
+.working-button .glyph-icon{
     -fx-fill: rgba(255, 213, 0, .87);
 }
 
-.meeting-microphone-icon {
+.working-button-pushed {
+    -fx-background-color: rgba(255, 213, 0, .87);
+}
+
+.working-button-pushed .glyph-icon{
+    -fx-fill: rgba(255, 255, 255, .87);
+}
+
+
+.meeting-microphone-button {
+    -fx-background-color:  #F1F1F1;
+}
+
+.meeting-microphone-button .glyph-icon{
     -fx-fill: rgba(177, 0, 0, .87);
 }
 
@@ -275,7 +286,16 @@ root {
     -fx-background-color: rgba(177, 0, 0, .87);
 }
 
-.meeting-webcam-icon {
+.meeting-microphone-button-pushed .glyph-icon{
+    -fx-fill: rgba(255, 255, 255, .87);
+}
+
+
+.meeting-webcam-button {
+    -fx-background-color:  #F1F1F1;
+}
+
+.meeting-webcam-button .glyph-icon{
     -fx-fill: rgba(128, 0, 128, .87);
 }
 
@@ -283,7 +303,16 @@ root {
     -fx-background-color: rgba(128, 0, 128, .87);
 }
 
-.automation-icon {
+.meeting-webcam-button-pushed .glyph-icon{
+    -fx-fill: rgba(255, 255, 255, .87);
+}
+
+
+.automation-button {
+    -fx-background-color:  #F1F1F1;
+}
+
+.automation-button .glyph-icon{
     -fx-fill: rgba(1, 108, 167, .87);
 }
 
@@ -291,7 +320,17 @@ root {
     -fx-background-color: rgba(1, 108, 167, .87);
 }
 
-.turn-off-icon {
+.automation-button-pushed .glyph-icon{
+    -fx-fill: rgba(255, 255, 255, .87);
+}
+
+
+
+.turn-off-button {
+    -fx-background-color:  #F1F1F1;
+}
+
+.turn-off-button .glyph-icon{
     -fx-fill: rgba(	0, 27, 41, .87);
 }
 
@@ -299,6 +338,9 @@ root {
     -fx-background-color: rgba(	0, 27, 41, .87);
 }
 
+.turn-off-button-pushed .glyph-icon{
+    -fx-fill: rgba(255, 255, 255, .87);
+}
 
 .main-pane {
     -fx-background-color:  rgba(122, 122, 122, .01);

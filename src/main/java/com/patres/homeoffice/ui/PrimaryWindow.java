@@ -61,7 +61,6 @@ public class PrimaryWindow {
             createTrayIcon();
         }
         return primaryStage;
-
     }
 
     private void createTrayIcon() {

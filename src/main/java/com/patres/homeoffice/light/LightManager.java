@@ -7,6 +7,8 @@ import io.github.zeroone3010.yahueapi.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
+
 import static com.patres.homeoffice.light.LightMode.AUTOMATION;
 
 public class LightManager {
@@ -53,6 +55,10 @@ public class LightManager {
             lightMode.handle(this);
             settingsManager.updateLightMode(lightMode);
         }
+    }
+
+    public Optional<LightMode> getCurrentLightMode() {
+        return Optional.ofNullable(currentLightMode);
     }
 
     void detectAutomationChanges() {
