@@ -6,12 +6,6 @@ light:
   brightnes: 30
   lightMode: AVAILABLE
   automationFrequencySeconds: 1
-imageDetector:
-  imageDetectorThreshold: 0.8
-  windowsBarStartXPosition: 1400
-  windowsBarStartYPosition: 920
-  windowsBarWidth: 305
-  windowsBarHight: 35
 window:
   pinned: true
   positionX:

@@ -9,7 +9,6 @@ import com.patres.homeoffice.ui.PrimaryWindow;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import nu.pattern.OpenCV;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +20,6 @@ public class ApplicationLauncher extends Application {
 
     public static void main(final String[] args) {
         logger.info("Application is running");
-        OpenCV.loadLocally();
-        logger.info("OpenCV is loaded");
-
         launch(args);
     }
 

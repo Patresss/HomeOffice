@@ -47,7 +47,7 @@ public class SettingsManager {
 
     public void updateWindowPosition(final Integer positionX, final Integer positionY) {
         final WindowSettings windowSettings = new WindowSettings(settingProperties.window().pinned(), positionX, positionY);
-        final SettingProperties newSettingProperties = new SettingProperties(settingProperties.light(), settingProperties.imageDetector(), windowSettings, settingProperties.workingTime());
+        final SettingProperties newSettingProperties = new SettingProperties(settingProperties.light(), windowSettings, settingProperties.workingTime());
         saveSettings(newSettingProperties);
     }
 
@@ -60,7 +60,7 @@ public class SettingsManager {
                 settingProperties.light().brightnes(),
                 lightMode,
                 settingProperties.light().automationFrequencySeconds());
-        final SettingProperties newSettingProperties = new SettingProperties(light, settingProperties.imageDetector(), settingProperties.window(), settingProperties.workingTime());
+        final SettingProperties newSettingProperties = new SettingProperties(light, settingProperties.window(), settingProperties.workingTime());
         saveSettings(newSettingProperties);
     }
 
@@ -76,7 +76,6 @@ public class SettingsManager {
                 settingProperties.light().automationFrequencySeconds());
         final SettingProperties newSettingProperties = new SettingProperties(
                 light,
-                settingProperties.imageDetector(),
                 settingProperties.window(),
                 settingProperties.workingTime());
         saveSettings(newSettingProperties);
@@ -111,10 +110,6 @@ public class SettingsManager {
 
     public void validateSettings() {
         final Map<Predicate<SettingProperties>, String> validationFields = Map.of(
-                settings -> settings.imageDetector().windowsBarStartXPosition() == null, "windows bar start X position cannot be empty",
-                settings -> settings.imageDetector().windowsBarStartYPosition() == null, "windows bar start Y position cannot be empty",
-                settings -> settings.imageDetector().windowsBarHight() == null, "windows bar hight cannot be empty",
-                settings -> settings.imageDetector().windowsBarWidth() == null, "windows bar width cannot be empty",
                 settings -> settings.light().phlipsHueIp() == null, "Philips hue ip cannot be empty",
                 settings -> settings.light().phlipsHueRoomName() == null, "Philips room name cannot be empty"
         );
@@ -139,13 +134,6 @@ public class SettingsManager {
                 Optional.ofNullable(settingProperties.light().lightMode()).orElse(LightMode.AVAILABLE),
                 Optional.ofNullable(settingProperties.light().automationFrequencySeconds()).orElse(1)
         );
-        final ImageDetectorSettings imageDetector = new ImageDetectorSettings(
-                Optional.ofNullable(settingProperties.imageDetector().imageDetectorThreshold()).orElse(0.8),
-                settingProperties.imageDetector().windowsBarStartXPosition(),
-                settingProperties.imageDetector().windowsBarStartYPosition(),
-                settingProperties.imageDetector().windowsBarWidth(),
-                settingProperties.imageDetector().windowsBarHight()
-        );
         final WindowSettings windowSettings = new WindowSettings(
                 Optional.ofNullable(settingProperties.window().pinned()).orElse(true),
                 Optional.ofNullable(settingProperties.window().positionX()).orElse(200),
@@ -159,7 +147,6 @@ public class SettingsManager {
         );
         final SettingProperties newSettingProperties = new SettingProperties(
                 light,
-                imageDetector,
                 windowSettings,
                 work);
         saveSettings(newSettingProperties);

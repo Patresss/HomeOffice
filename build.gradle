@@ -5,9 +5,9 @@ buildscript {
     ext.slf4j_version = '1.7.5'
     ext.fontawesomefx_fontawesome_version = '4.7.0-9.1.2'
     ext.fontawesomefx_commons_version = '9.1.2'
-    ext.opencv_version = '4.5.1-2'
     ext.jackson_version = '2.13.0-rc2'
     ext.philips_hue_version = '2.3.0'
+    ext.jna_version = '5.12.0'
 
     repositories {
         mavenCentral()
@@ -57,20 +57,18 @@ dependencies {
     implementation "de.jensd:fontawesomefx-commons:$fontawesomefx_commons_version"
 
 
-    implementation "org.openpnp:opencv:$opencv_version"
     implementation "com.fasterxml.jackson.core:jackson-core:$jackson_version"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson_version"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jackson_version"
     implementation "io.github.zeroone3010:yetanotherhueapi:$philips_hue_version"
-
+    implementation "net.java.dev.jna:jna-platform:$jna_version"
 }
 
 
 def runArgsValue =  [
         "--add-opens=java.base/java.lang.reflect=com.jfoenix",
-        "--add-opens=java.base/java.lang=opencv",
         "--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix",
         "--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix",
         "--add-opens=javafx.controls/javafx.scene.control=homeOffice",

@@ -1,8 +1,6 @@
 package com.patres.homeoffice.light;
 
 import com.patres.homeoffice.exception.ApplicationException;
-import com.patres.homeoffice.opencv.ImageDetector;
-import com.patres.homeoffice.settings.ImageDetectorSettings;
 import com.patres.homeoffice.settings.LightSettings;
 import com.patres.homeoffice.settings.SettingsManager;
 import com.patres.homeoffice.settings.WorkSettings;
@@ -13,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 
 import static com.patres.homeoffice.light.LightMode.*;
+import static com.patres.homeoffice.registry.RegistryManager.isMicrophoneWorking;
 
 public class LightManager {
 
@@ -21,8 +20,6 @@ public class LightManager {
     static final Color RED = Color.of(177, 0, 0);
 
     private static final Logger logger = LoggerFactory.getLogger(LightManager.class);
-
-    private final ImageDetector imageDetector;
 
     private final String roomName;
     private final Integer brightness;
@@ -37,7 +34,6 @@ public class LightManager {
 
     public LightManager(final SettingsManager settingsManager) {
         final LightSettings lightSettings = settingsManager.getSettings().light();
-        final ImageDetectorSettings imageDetectorSettings = settingsManager.getSettings().imageDetector();
 
         logger.info("Creating Hue...");
         logger.debug("phlipsHueIp: {}, phlipsHueApiKey: {} ", lightSettings.phlipsHueIp(), lightSettings.phlipsHueApiKey());
@@ -53,12 +49,6 @@ public class LightManager {
         this.currentLightMode = lightSettings.lightMode();
         this.automationFrequencySeconds = lightSettings.automationFrequencySeconds();
         this.settingsManager = settingsManager;
-
-        try {
-            this.imageDetector = new ImageDetector(imageDetectorSettings);
-        } catch (Exception e) {
-            throw new ApplicationException(e);
-        }
 
         changeLightMode(currentLightMode);
     }
@@ -120,7 +110,7 @@ public class LightManager {
 
     private void turnOnAutomationProcess() {
         if (isWorkingTime()) {
-            if (imageDetector.isImageDetected()) {
+            if (isMicrophoneWorking()) {
                 changeLightState(MEETING);
             } else {
                 changeLightState(WORKING);
