@@ -3,13 +3,12 @@ package com.patres.homeoffice.light;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static com.patres.homeoffice.light.LightManager.*;
-
 public enum LightMode {
 
-    AVAILABLE(lightManager -> lightManager.turnOn(GREEN)),
-    WORKING(lightManager -> lightManager.turnOn(YELLOW)),
-    MEETING(lightManager -> lightManager.turnOn(RED)),
+    AVAILABLE(lightManager -> lightManager.turnOn(ColorType.GREEN.getPhilipsHueColor())),
+    WORKING(lightManager -> lightManager.turnOn(ColorType.YELLOW.getPhilipsHueColor())),
+    MEETING_MICROPHONE(lightManager -> lightManager.turnOn(ColorType.RED.getPhilipsHueColor())),
+    MEETING_WEBCAM(lightManager -> lightManager.turnOn(ColorType.PURPLE.getPhilipsHueColor())),
     TURN_OFF(LightManager::turnOff),
     AUTOMATION(LightManager::detectAutomationChanges);
 

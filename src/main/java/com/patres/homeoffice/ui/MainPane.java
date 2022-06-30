@@ -6,7 +6,6 @@ import com.patres.homeoffice.exception.ApplicationException;
 import com.patres.homeoffice.light.LightManager;
 import com.patres.homeoffice.light.LightMode;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +27,9 @@ public class MainPane extends AnchorPane {
     @FXML
     private JFXButton workingButton;
     @FXML
-    private JFXButton meetingButton;
+    private JFXButton meetingMicrophoneButton;
+    @FXML
+    private JFXButton meetingWebcamButton;
     @FXML
     private JFXButton automationButton;
     @FXML
@@ -67,9 +68,13 @@ public class MainPane extends AnchorPane {
             selectButton(workingButton);
             new Thread(() -> phlipsHueManager.changeLightMode(LightMode.WORKING)).start();
         });
-        meetingButton.setOnAction(event -> {
-            selectButton(meetingButton);
-            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.MEETING)).start();
+        meetingMicrophoneButton.setOnAction(event -> {
+            selectButton(meetingMicrophoneButton);
+            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.MEETING_MICROPHONE)).start();
+        });
+        meetingWebcamButton.setOnAction(event -> {
+            selectButton(meetingWebcamButton);
+            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.MEETING_WEBCAM)).start();
         });
         automationButton.setOnAction(event -> {
             selectButton(automationButton);

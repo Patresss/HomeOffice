@@ -267,12 +267,20 @@ root {
     -fx-fill: rgba(255, 213, 0, .87);
 }
 
-.meeting-icon {
+.meeting-microphone-icon {
     -fx-fill: rgba(177, 0, 0, .87);
 }
 
-.meeting-button-pushed {
+.meeting-microphone-button-pushed {
     -fx-background-color: rgba(177, 0, 0, .87);
+}
+
+.meeting-webcam-icon {
+    -fx-fill: rgba(128, 0, 128, .87);
+}
+
+.meeting-webcam-button-pushed {
+    -fx-background-color: rgba(128, 0, 128, .87);
 }
 
 .automation-icon {

@@ -12,12 +12,9 @@ import java.time.LocalDateTime;
 
 import static com.patres.homeoffice.light.LightMode.*;
 import static com.patres.homeoffice.registry.RegistryManager.isMicrophoneWorking;
+import static com.patres.homeoffice.registry.RegistryManager.isWebcamWorking;
 
 public class LightManager {
-
-    static final Color GREEN = Color.of(50, 205, 50);
-    static final Color YELLOW = Color.of(255, 213, 0);
-    static final Color RED = Color.of(177, 0, 0);
 
     private static final Logger logger = LoggerFactory.getLogger(LightManager.class);
 
@@ -43,7 +40,8 @@ public class LightManager {
         this.roomName = lightSettings.phlipsHueRoomName();
         this.brightness = lightSettings.brightnes();
         logger.info("Finding room...");
-        this.room = hue.getRoomByName(roomName).orElseThrow(() -> new ApplicationException("Cannot find room by name: " + roomName));
+        this.room = hue.getRoomByName(roomName)
+                .orElseThrow(() -> new ApplicationException("Cannot find room by name: " + roomName));
         logger.info("Finding light...");
         this.light = this.room.getLightByName(lightSettings.phlipsHueLightName()).orElse(null);
         this.currentLightMode = lightSettings.lightMode();
@@ -109,12 +107,12 @@ public class LightManager {
     }
 
     private void turnOnAutomationProcess() {
-        if (isWorkingTime()) {
-            if (isMicrophoneWorking()) {
-                changeLightState(MEETING);
-            } else {
-                changeLightState(WORKING);
-            }
+        if (isWebcamWorking()) {
+            changeLightState(MEETING_WEBCAM);
+        } else if (isMicrophoneWorking()) {
+            changeLightState(MEETING_MICROPHONE);
+        } else if (isWorkingTime()) {
+            changeLightState(WORKING);
         } else {
             changeLightState(AVAILABLE);
         }
