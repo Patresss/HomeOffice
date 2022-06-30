@@ -3,16 +3,11 @@ package com.patres.homeoffice.light;
 import com.patres.homeoffice.exception.ApplicationException;
 import com.patres.homeoffice.settings.LightSettings;
 import com.patres.homeoffice.settings.SettingsManager;
-import com.patres.homeoffice.settings.WorkSettings;
 import io.github.zeroone3010.yahueapi.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDateTime;
-
-import static com.patres.homeoffice.light.LightMode.*;
-import static com.patres.homeoffice.registry.RegistryManager.isMicrophoneWorking;
-import static com.patres.homeoffice.registry.RegistryManager.isWebcamWorking;
+import static com.patres.homeoffice.light.LightMode.AUTOMATION;
 
 public class LightManager {
 
@@ -23,11 +18,11 @@ public class LightManager {
     private final Integer automationFrequencySeconds;
     private final Room room;
     private final Light light;
-    private final WorkSettings workSettings;
     private final SettingsManager settingsManager;
+    private final AutomationProcess automationProcess;
 
     private LightMode currentLightMode;
-    private LightMode currentLightState;
+    private State currentState;
 
     public LightManager(final SettingsManager settingsManager) {
         final LightSettings lightSettings = settingsManager.getSettings().light();
@@ -36,7 +31,7 @@ public class LightManager {
         logger.debug("phlipsHueIp: {}, phlipsHueApiKey: {} ", lightSettings.phlipsHueIp(), lightSettings.phlipsHueApiKey());
         final Hue hue = new Hue(lightSettings.phlipsHueIp(), lightSettings.phlipsHueApiKey());
 
-        this.workSettings = settingsManager.getSettings().workingTime();
+        this.automationProcess = new AutomationProcess(this, settingsManager.getSettings().workingTime());
         this.roomName = lightSettings.phlipsHueRoomName();
         this.brightness = lightSettings.brightnes();
         logger.info("Finding room...");
@@ -51,30 +46,19 @@ public class LightManager {
         changeLightMode(currentLightMode);
     }
 
-
     public void changeLightMode(final LightMode lightMode) {
-        if (currentLightState != lightMode) {
+        if (currentLightMode != lightMode) {
             logger.info("Changing light mode: {} -> {}", currentLightMode, lightMode);
-            currentLightState = lightMode;
             currentLightMode = lightMode;
-            executeMode(lightMode);
+            lightMode.handle(this);
             settingsManager.updateLightMode(lightMode);
-        }
-        currentLightMode = lightMode;
-    }
-
-    public void changeLightState(final LightMode lightMode) {
-        if (currentLightState != lightMode) {
-            logger.info("Changing light state: {} -> {}", currentLightState, lightMode);
-            currentLightState = lightMode;
-            executeMode(lightMode);
         }
     }
 
     void detectAutomationChanges() {
         final Thread thread = new Thread(() -> {
             while (currentLightMode == AUTOMATION) {
-                turnOnAutomationProcess();
+                automationProcess.turnOnAutomationProcess();
                 try {
                     Thread.sleep(1000L * automationFrequencySeconds);
                 } catch (InterruptedException e) {
@@ -87,44 +71,26 @@ public class LightManager {
 
     void turnOn(Color color) {
         final State state = State.builder().color(color).on();
-        logger.info("Turn on light: {}", state);
-        if (light != null) {
-            light.setState(state);
-            light.setBrightness(brightness);
-        } else {
-            room.setState(state);
-            room.setBrightness(brightness);
+        if (!state.equals(currentState)) {
+            logger.info("Turn on light: {}", state);
+            currentState = state;
+            if (light != null) {
+                light.setState(state);
+                light.setBrightness(brightness);
+            } else {
+                room.setState(state);
+                room.setBrightness(brightness);
+            }
         }
     }
 
     void turnOff() {
         logger.info("Turn off light");
+        currentState = null;
         if (light != null) {
             light.turnOff();
         } else {
             room.turnOff();
         }
     }
-
-    private void turnOnAutomationProcess() {
-        if (isWebcamWorking()) {
-            changeLightState(MEETING_WEBCAM);
-        } else if (isMicrophoneWorking()) {
-            changeLightState(MEETING_MICROPHONE);
-        } else if (isWorkingTime()) {
-            changeLightState(WORKING);
-        } else {
-            changeLightState(AVAILABLE);
-        }
-    }
-
-    private boolean isWorkingTime() {
-        final LocalDateTime now = LocalDateTime.now();
-        return workSettings.days().contains(now.getDayOfWeek()) && now.toLocalTime().isAfter(workSettings.start()) && now.toLocalTime().isBefore(workSettings.end());
-    }
-
-    private void executeMode(final LightMode lightMode) {
-        lightMode.handle(this);
-    }
-
 }

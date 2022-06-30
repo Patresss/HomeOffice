@@ -23,7 +23,8 @@ public class RegistryManager {
     public static boolean isWebcamWorking() {
         return isDeviceWorking(WEBCAM);
     }
-    private static boolean isDeviceWorking(final RegistryType registryType) {
+
+    public static boolean isDeviceWorking(final RegistryType registryType) {
         final String[] folders = Advapi32Util.registryGetKeys(WinReg.HKEY_CURRENT_USER, registryType.getNonPackagePath());
         return Arrays.stream(folders)
                 .map(folder -> registryType.getNonPackagePath() + "\\" + folder)
