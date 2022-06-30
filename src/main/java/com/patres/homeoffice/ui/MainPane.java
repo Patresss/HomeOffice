@@ -21,8 +21,6 @@ public class MainPane extends AnchorPane {
     public static final String BUTTON_PUSHED_SUFFIX_STYLE = "-button-pushed";
     public static final String BUTTON_SUFFIX_STYLE = "-button";
     public static final String MAIN_BUTTON_COLOR_STYLE = "main-button-color";
-    public static final String PUSHED_ICON_STYLE = "pushed-icon";
-    public static final String ICON_SUFFIX_STYLE = "-icon";
     @FXML
     private JFXButton availableButton;
     @FXML

@@ -240,6 +240,10 @@ root {
 }
 
 
+.available-button .jfx-rippler {
+    -jfx-rippler-fill: rgba(50,205,50, .87);
+}
+
 .available-button {
     -fx-background-color:  #F1F1F1;
 }
@@ -256,6 +260,10 @@ root {
     -fx-fill: rgba(255, 255, 255, .87);
 }
 
+
+.working-button .jfx-rippler {
+    -jfx-rippler-fill: rgba(255, 213, 0, .87);
+}
 
 .working-button {
     -fx-background-color:  #F1F1F1;
@@ -274,6 +282,10 @@ root {
 }
 
 
+.meeting-microphone-button .jfx-rippler {
+    -jfx-rippler-fill: rgba(177, 0, 0, .87);
+}
+
 .meeting-microphone-button {
     -fx-background-color:  #F1F1F1;
 }
@@ -290,6 +302,11 @@ root {
     -fx-fill: rgba(255, 255, 255, .87);
 }
 
+
+
+.meeting-webcam-button .jfx-rippler {
+    -jfx-rippler-fill: rgba(128, 0, 128, .87);
+}
 
 .meeting-webcam-button {
     -fx-background-color:  #F1F1F1;
@@ -308,6 +325,10 @@ root {
 }
 
 
+.automation-button .jfx-rippler {
+    -jfx-rippler-fill: rgba(1, 108, 167, .87);
+}
+
 .automation-button {
     -fx-background-color:  #F1F1F1;
 }
@@ -325,6 +346,9 @@ root {
 }
 
 
+.turn-off-button .jfx-rippler {
+    -jfx-rippler-fill: rgba(0, 27, 41, .87);
+}
 
 .turn-off-button {
     -fx-background-color:  #F1F1F1;
