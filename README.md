@@ -5,8 +5,11 @@ Application for notification of household members about the status of working fr
 ![](https://github.com/Patresss/HomeOffice/blob/master/readme-resources/application.png)
 
 ## Download - 1.0.0 version
-* Installer exe (windows) - [download exe](https://github.com/Patresss/HomeOffice/releases/download/1.0.0/HomeOffice-1.0.0.exe)
-* Executable jar (bin/Automation Boot) - [download zip](https://github.com/Patresss/HomeOffice/releases/download/1.0.0/HomeOffice-1.0.0.zip)
+* Installer exe (windows) - [download exe](https://github.com/Patresss/HomeOffice/raw/master/release/1.0.0/HomeOffice%20-%20Philips%20Hue-1.0.0.exe)
+* Executable jar - [download zip](https://github.com/Patresss/HomeOffice/raw/master/release/1.0.0/HomeOffice%20-%20Philips%20Hue-1.0.0.zip)
+
+## Video
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/yGT-E0wikoc/0.jpg)](http://www.youtube.com/watch?v=yGT-E0wikoc "Home Office - Philips Hue")
 
 ## Installation
 1. Install the application
@@ -64,15 +67,12 @@ workingTime:
 ## Built With
 
 * [JFoenix](https://github.com/jfoenixadmin/JFoenix)
-* [Kotest](https://github.com/kotest/kotest)
-* [commons-lang](https://github.com/apache/commons-lang)
-* [jnativehook](https://github.com/kwhat/jnativehook)
 * [log4j](https://logging.apache.org/log4j/2.x/)
 * [slf4j](http://www.slf4j.org/)
 * [FontAwesomeFx](https://www.jensd.de/wordpress/?tag=fontawesomefx)
-* [Commons IO](http://commons.apache.org/proper/commons-io/)
-* [OpenCV](https://github.com/openpnp/opencv)
-* [Jackson](https://github.com/FasterXML/jackson-module-kotlin)
+* [Jackson](https://github.com/FasterXML/jackson-core)
+* [Java Native Access (JNA)](https://github.com/java-native-access/jna)
+* [Yet Another Hue API](https://github.com/ZeroOne3010/yetanotherhueapi)
 
 ## License
 
