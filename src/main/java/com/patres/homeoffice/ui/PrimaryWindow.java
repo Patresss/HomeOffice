@@ -47,8 +47,10 @@ public class PrimaryWindow {
         final WindowSettings windowSettings = settingsManager.getSettings().window();
         final MainPane root = new MainPane(primaryStage, windowSettings.pinned(), lightManager);
         primaryStage.getIcons().add(icon);
-        primaryStage.setX(windowSettings.positionX());
-        primaryStage.setY(windowSettings.positionY());
+        if (windowSettings.enablePreviousPosition()) {
+            primaryStage.setX(windowSettings.positionX());
+            primaryStage.setY(windowSettings.positionY());
+        }
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setTitle("Home office");
         primaryStage.setScene(createScene(root));

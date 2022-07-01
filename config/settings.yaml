@@ -8,8 +8,9 @@ light:
   automationFrequencySeconds: 1
 window:
   pinned: true
-  positionX: -938
-  positionY: 138
+  enablePreviousPosition: false
+  positionX: 200
+  positionY: 200
 workingTime:
   days:
   - "MONDAY"

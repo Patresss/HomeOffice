@@ -46,7 +46,7 @@ public class SettingsManager {
     }
 
     public void updateWindowPosition(final Integer positionX, final Integer positionY) {
-        final WindowSettings windowSettings = new WindowSettings(settingProperties.window().pinned(), positionX, positionY);
+        final WindowSettings windowSettings = new WindowSettings(settingProperties.window().pinned(), settingProperties.window().enablePreviousPosition(), positionX, positionY);
         final SettingProperties newSettingProperties = new SettingProperties(settingProperties.light(), windowSettings, settingProperties.workingTime());
         saveSettings(newSettingProperties);
     }
@@ -136,6 +136,7 @@ public class SettingsManager {
         );
         final WindowSettings windowSettings = new WindowSettings(
                 Optional.ofNullable(settingProperties.window().pinned()).orElse(true),
+                Optional.ofNullable(settingProperties.window().enablePreviousPosition()).orElse(false),
                 Optional.ofNullable(settingProperties.window().positionX()).orElse(200),
                 Optional.ofNullable(settingProperties.window().positionY()).orElse(200)
         );
