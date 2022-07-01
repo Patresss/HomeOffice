@@ -8,12 +8,12 @@ module homeOffice {
     requires java.logging;
     requires jdk.httpserver;
     requires de.jensd.fx.glyphs.fontawesome;
-    requires slf4j.api;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.dataformat.yaml;
     requires yetanotherhueapi;
     requires com.fasterxml.jackson.datatype.jsr310;
     requires com.sun.jna.platform;
+    requires slf4j.api;
 
     exports com.patres.homeoffice;
     exports com.patres.homeoffice.light to com.fasterxml.jackson.databind, javafx.fxml;

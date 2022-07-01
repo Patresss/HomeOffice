@@ -48,13 +48,18 @@ public class LightManager {
         changeLightMode(currentLightMode);
     }
 
-    public void changeLightMode(final LightMode lightMode) {
+
+    public void changeLightModeInCaseOfNewMode(final LightMode lightMode) {
         if (currentLightMode != lightMode) {
-            logger.info("Changing light mode: {} -> {}", currentLightMode, lightMode);
-            currentLightMode = lightMode;
-            lightMode.handle(this);
-            settingsManager.updateLightMode(lightMode);
+            changeLightMode(lightMode);
         }
+    }
+
+    private void changeLightMode(final LightMode lightMode) {
+        logger.info("Changing light mode: {} -> {}", currentLightMode, lightMode);
+        currentLightMode = lightMode;
+        lightMode.handle(this);
+        settingsManager.updateLightMode(lightMode);
     }
 
     public Optional<LightMode> getCurrentLightMode() {

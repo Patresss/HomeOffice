@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+import static com.patres.homeoffice.settings.SettingsManager.SETTING_PATH;
+
 public class ApplicationLauncher extends Application {
 
     private static final Logger logger = LoggerFactory.getLogger(ApplicationLauncher.class);
@@ -58,7 +60,7 @@ public class ApplicationLauncher extends Application {
     private SettingsManager createSettingsManager() {
         logger.info("Setting are loading");
 
-        final SettingsManager settingsManager = new SettingsManager("config/settings.yaml");
+        final SettingsManager settingsManager = new SettingsManager(SETTING_PATH);
         settingsManager.calculateDefaultValues();
         settingsManager.validateSettings();
 

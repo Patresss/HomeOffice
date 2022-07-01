@@ -5,16 +5,12 @@ import com.jfoenix.controls.JFXToggleButton;
 import com.patres.homeoffice.exception.ApplicationException;
 import com.patres.homeoffice.light.LightManager;
 import com.patres.homeoffice.light.LightMode;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class MainPane extends AnchorPane {
 
@@ -62,27 +58,27 @@ public class MainPane extends AnchorPane {
 
         availableButton.setOnAction(event -> {
             selectButton(availableButton);
-            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.AVAILABLE)).start();
+            new Thread(() -> phlipsHueManager.changeLightModeInCaseOfNewMode(LightMode.AVAILABLE)).start();
         });
         workingButton.setOnAction(event -> {
             selectButton(workingButton);
-            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.WORKING)).start();
+            new Thread(() -> phlipsHueManager.changeLightModeInCaseOfNewMode(LightMode.WORKING)).start();
         });
         meetingMicrophoneButton.setOnAction(event -> {
             selectButton(meetingMicrophoneButton);
-            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.MEETING_MICROPHONE)).start();
+            new Thread(() -> phlipsHueManager.changeLightModeInCaseOfNewMode(LightMode.MEETING_MICROPHONE)).start();
         });
         meetingWebcamButton.setOnAction(event -> {
             selectButton(meetingWebcamButton);
-            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.MEETING_WEBCAM)).start();
+            new Thread(() -> phlipsHueManager.changeLightModeInCaseOfNewMode(LightMode.MEETING_WEBCAM)).start();
         });
         automationButton.setOnAction(event -> {
             selectButton(automationButton);
-            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.AUTOMATION)).start();
+            new Thread(() -> phlipsHueManager.changeLightModeInCaseOfNewMode(LightMode.AUTOMATION)).start();
         });
         turnOffButton.setOnAction(event -> {
             selectButton(turnOffButton);
-            new Thread(() -> phlipsHueManager.changeLightMode(LightMode.TURN_OFF)).start();
+            new Thread(() -> phlipsHueManager.changeLightModeInCaseOfNewMode(LightMode.TURN_OFF)).start();
         });
         phlipsHueManager.getCurrentLightMode()
                 .ifPresent(lightMode -> selectButton(getButtonByLightMode(lightMode)));

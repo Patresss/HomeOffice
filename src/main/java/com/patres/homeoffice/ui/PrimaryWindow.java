@@ -1,6 +1,5 @@
 package com.patres.homeoffice.ui;
 
-import com.jfoenix.controls.*;
 import com.patres.homeoffice.ApplicationLauncher;
 import com.patres.homeoffice.exception.ApplicationException;
 import com.patres.homeoffice.light.LightManager;
@@ -13,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -24,7 +22,6 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Optional;
 
@@ -52,7 +49,7 @@ public class PrimaryWindow {
             primaryStage.setY(windowSettings.positionY());
         }
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setTitle("Home office");
+        primaryStage.setTitle("HomeOffice - PhilipsHue");
         primaryStage.setScene(createScene(root));
 
         makeDraggable(primaryStage, root);

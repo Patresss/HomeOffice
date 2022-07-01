@@ -23,6 +23,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class SettingsManager {
 
+    public static final String SETTING_PATH = "config/settings.yaml";
     private static final Logger logger = getLogger(SettingsManager.class);
 
     private final ObjectMapper mapper;
@@ -37,7 +38,7 @@ public class SettingsManager {
         try {
             this.settingProperties = loadSettings();
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("Unable to load settings. Make sure you run the program with administrative privileges.", e);
         }
     }
 
@@ -93,7 +94,7 @@ public class SettingsManager {
             Files.write(path, settingsAsByte);
             settingProperties = newSettingProperties;
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("Unable to save settings. Make sure you run the program with administrative privileges.", e);
         }
     }
 
@@ -119,7 +120,7 @@ public class SettingsManager {
                 .collect(Collectors.toList());
 
         if (!errors.isEmpty()) {
-            throw new ApplicationException("Invalid setting file: " + String.join(" ,", errors));
+            throw new ApplicationException("Invalid setting file - " + SETTING_PATH + ": " + String.join(" ,", errors));
         }
 
     }
