@@ -1,6 +1,6 @@
 # HomeOffice - Philips Hue
 
-Application for notification of household members about the status of working from home. It has an automatic process that, based on working hours and the registry, sets the appropriate light depending on whether you are available, working, having a meeting with or without a camera
+Application for notification of household members about the status of working from home. It has an automatic process that, based on working hours and the registry, sets the appropriate light depending on whether you are available, working, having a meeting with or without a camera. Only available for Windows.
 
 ![](https://github.com/Patresss/HomeOffice/blob/master/readme-resources/application.png)
 
