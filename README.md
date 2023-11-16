@@ -1,5 +1,7 @@
 # HomeOffice - Philips Hue
 
+Home Assistant version: https://github.com/Patresss/HomeOffice---Home-Assistant
+
 Application to notify household members of your work status at home. It has an automatic process that, based on working hours and register, sets the appropriate light depending on whether you are available, working, have a meeting with or without a camera. Available for Windows only.
 
 ![](https://github.com/Patresss/HomeOffice/blob/master/readme-resources/application.png)
